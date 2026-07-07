@@ -1,0 +1,5 @@
+<resources>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="argus_cyan">#00f0ff</color>  <color name="argus_cyan_muted">#7df4ff</color>  <color name="argus_cyan_glass">#6600f0ff</color>  <color name="argus_red_danger">#d30017</color>  <color name="argus_red_light">#ffb4ab</color>  <color name="argus_red_glass">#33d30017</color>  <color name="argus_surface_dark">#66131313</color>  <color name="argus_surface_card">#66353535</color>  <color name="argus_outline">#3b494b</color>  </resources>

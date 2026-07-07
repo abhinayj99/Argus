@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/viewFinder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <View android:layout_width="match_parent" android:layout_height="match_parent" android:background="#44000000" />
+
+    <LinearLayout
+        android:id="@+id/topStatusBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E6131313"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:elevation="10dp"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="ARGUS_SYSTEM_ACTIVE" android:textColor="#00f0ff" android:textSize="12sp" android:textStyle="bold" android:letterSpacing="0.1"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="#33d30017" android:paddingHorizontal="8dp" android:paddingVertical="4dp" android:text="■ SCANNING" android:textColor="#ffb4ab" android:textSize="10sp" android:textStyle="bold"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/viewCameraThreat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/topStatusBar"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavBar">
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
+
+            <LinearLayout android:id="@+id/redThreatBanner" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="#d30017" android:padding="12dp" android:gravity="center" android:visibility="gone">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚠ CRITICAL THREAT DETECTED: HIDDEN LENS SUSPECTED ⚠" android:textColor="#FFFFFF" android:textSize="12sp" android:textStyle="bold"/>
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="match_parent">
+
+                <com.example.hcamd.TacticalCrosshairView
+                    android:id="@+id/tacticalCrosshair"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/bottomDataPanel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <LinearLayout android:id="@+id/redTargetBox" android:layout_width="120dp" android:layout_height="120dp" android:background="#33d30017" android:orientation="vertical" android:gravity="center" android:visibility="gone" app:layout_constraintTop_toTopOf="@id/tacticalCrosshair" app:layout_constraintBottom_toBottomOf="@id/tacticalCrosshair" app:layout_constraintStart_toStartOf="@id/tacticalCrosshair" app:layout_constraintEnd_toEndOf="@id/tacticalCrosshair">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="POSSIBLE LENS" android:textColor="#ffb4ab" android:textSize="10sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="98.4%" android:textColor="#FFFFFF" android:textSize="20sp" android:textStyle="bold"/>
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/rightSidePanels" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:visibility="gone" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="@id/tacticalCrosshair" app:layout_constraintBottom_toBottomOf="@id/tacticalCrosshair">
+                    <LinearLayout android:layout_width="100dp" android:layout_height="wrap_content" android:background="#B3000000" android:orientation="vertical" android:padding="8dp" android:layout_marginBottom="8dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="DISTANCE" android:textColor="#00f0ff" android:textSize="8sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1.42m" android:textColor="#FFFFFF" android:textStyle="bold" android:textSize="14sp"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="100dp" android:layout_height="wrap_content" android:background="#B3000000" android:orientation="vertical" android:padding="8dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SIGNAL IR" android:textColor="#ffb4ab" android:textSize="8sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="DETECTED" android:textColor="#FFFFFF" android:textStyle="bold" android:textSize="14sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/bottomDataPanel" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="16dp" android:background="@drawable/bg_tactical_card" android:padding="16dp" android:orientation="horizontal" android:gravity="bottom" app:layout_constraintBottom_toBottomOf="parent">
+
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:paddingEnd="12dp">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="bottom" android:layout_marginBottom="4dp">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="RF_FIELD_STRENGTH" android:textColor="#00f0ff" android:textSize="9sp"/>
+                            <TextView android:id="@+id/tvCamRssi" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="-100 dBm" android:textColor="#00f0ff" android:textSize="12sp" android:textStyle="bold"/>
+                        </LinearLayout>
+                        <ProgressBar android:id="@+id/progressRssi" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="4dp" android:max="100" android:progress="30" android:progressTint="#00f0ff" android:progressBackgroundTint="#3b494b"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:paddingEnd="12dp">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="bottom" android:layout_marginBottom="4dp">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="THERMAL_SIGNATURE" android:textColor="#00f0ff" android:textSize="9sp"/>
+                            <TextView android:id="@+id/tvCamTemp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25.0 °C" android:textColor="#00f0ff" android:textSize="12sp" android:textStyle="bold"/>
+                        </LinearLayout>
+                        <ProgressBar android:id="@+id/progressTemp" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="4dp" android:max="100" android:progress="50" android:progressTint="#00f0ff" android:progressBackgroundTint="#3b494b"/>
+                    </LinearLayout>
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="#d30017" android:paddingHorizontal="12dp" android:paddingVertical="8dp" android:text="NEUTRALIZE" android:textColor="#FFFFFF" android:textStyle="bold" android:textSize="10sp"/>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/viewNetworkTelemetry"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:background="#DD000000"
+        app:layout_constraintTop_toBottomOf="@id/topStatusBar"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavBar">
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="32dp" android:background="@drawable/bg_tactical_card" android:orientation="vertical" android:padding="24dp" android:layout_gravity="center" android:gravity="center_horizontal">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="LIVE_TELEMETRY_V4.2" android:textColor="#00f0ff" android:textSize="10sp" android:layout_gravity="end" android:layout_marginBottom="16dp"/>
+
+            <FrameLayout android:layout_width="160dp" android:layout_height="80dp">
+                <com.example.hcamd.TacticalGaugeView android:id="@+id/gaugeRssi" android:layout_width="match_parent" android:layout_height="match_parent" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="-100 DBM" android:textColor="#849495" android:textSize="8sp" android:layout_gravity="bottom|start" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0 DBM" android:textColor="#849495" android:textSize="8sp" android:layout_gravity="bottom|end" />
+            </FrameLayout>
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="RF SIGNAL" android:textColor="#7df4ff" android:textSize="12sp" android:layout_marginTop="8dp"/>
+            <TextView android:id="@+id/tvNetRssi" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="-28 dBm" android:textColor="#ffb4ab" android:textSize="32sp" android:textStyle="bold"/>
+            <TextView android:id="@+id/tvNetRssiBadge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="DANGER ZONE" android:textColor="#ffb4ab" android:background="#33d30017" android:paddingHorizontal="8dp" android:paddingVertical="4dp" android:textSize="10sp" android:layout_marginTop="4dp"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#33ffffff" android:layout_marginVertical="24dp"/>
+
+            <FrameLayout android:layout_width="160dp" android:layout_height="80dp">
+                <com.example.hcamd.TacticalGaugeView android:id="@+id/gaugeTemp" android:layout_width="match_parent" android:layout_height="match_parent" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="20°C" android:textColor="#849495" android:textSize="8sp" android:layout_gravity="bottom|start" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="50°C" android:textColor="#849495" android:textSize="8sp" android:layout_gravity="bottom|end" />
+            </FrameLayout>
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="THERMAL DENSITY" android:textColor="#7df4ff" android:textSize="12sp" android:layout_marginTop="8dp"/>
+            <TextView android:id="@+id/tvNetTemp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="42.0 °C" android:textColor="#00f0ff" android:textSize="32sp" android:textStyle="bold"/>
+            <TextView android:id="@+id/tvNetTempBadge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="HIGH VARIANCE" android:textColor="#00f0ff" android:background="#3300f0ff" android:paddingHorizontal="8dp" android:paddingVertical="4dp" android:textSize="10sp" android:layout_marginTop="4dp"/>
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="#E6131313"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <FrameLayout android:id="@+id/btnNavCamera" android:layout_width="60dp" android:layout_height="60dp" android:background="#00f0ff" android:layout_marginEnd="32dp">
+            <TextView android:id="@+id/iconCamera" android:layout_width="match_parent" android:layout_height="match_parent" android:text="🎥" android:gravity="center" android:textColor="#000000" android:textSize="24sp"/>
+        </FrameLayout>
+
+        <FrameLayout android:id="@+id/btnNavNetwork" android:layout_width="60dp" android:layout_height="60dp" android:background="#00000000">
+            <TextView android:id="@+id/iconNetwork" android:layout_width="match_parent" android:layout_height="match_parent" android:text="📡" android:gravity="center" android:textColor="#7df4ff" android:textSize="24sp"/>
+        </FrameLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
